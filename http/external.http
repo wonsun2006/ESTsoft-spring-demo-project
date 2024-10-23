@@ -1,0 +1,5 @@
+### 외부 API 게시글 불러오기
+GET http://localhost:8080/api/external/articles
+
+### 외부 API 댓글 불러오기
+GET http://localhost:8080/api/external/comments
