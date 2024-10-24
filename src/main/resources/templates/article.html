@@ -21,7 +21,7 @@
                     <div class="text-muted fst-italic mb-2" th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}|"></div>   <!-- 시간 출력 -->
                 </header>
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"  th:text="${article.postContent}"></p>            <!-- postContent 출력 -->
+                    <p class="fs-5 mb-4"  th:text="${article.content}"></p>            <!-- postContent 출력 -->
                 </section>
                 <button type="button" id="modify-btn"
                         th:onclick="|location.href='@{/new-article?id={articleId}(articleId=${article.id})}'|"
