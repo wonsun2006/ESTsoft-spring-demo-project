@@ -47,7 +47,7 @@ public class ExternalApiController {
 
 		if(resultList.getStatusCode().is2xxSuccessful()){
 			for(PostContent postContent : resultList.getBody()){
-				blogService.saveArticle(new ArticleRequestDTO(postContent.getId(), postContent.getTitle(), postContent.getBody()));
+				blogService.saveArticle(new ArticleRequestDTO(postContent.getTitle(), postContent.getBody()));
 			}
 		}else{
 			return "Failed";

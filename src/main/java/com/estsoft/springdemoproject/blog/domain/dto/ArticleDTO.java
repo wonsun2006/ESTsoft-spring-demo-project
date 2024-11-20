@@ -18,7 +18,7 @@ import lombok.Setter;
 @Schema(description = "블로그 조회 결과")
 public class ArticleDTO {
 	@Schema(description = "블로그 ID", type = "Long")
-	private Long articleId;
+	private Long id;
 	@Schema(description = "블로그 제목", type = "String")
 	private String title;
 	@Schema(description = "블로그 내용", type = "String")
@@ -29,7 +29,7 @@ public class ArticleDTO {
 	private LocalDateTime updatedAt;
 
 	public ArticleDTO(Article article) {
-		articleId = article.getId();
+		id = article.getId();
 		title = article.getTitle();
 		content = article.getContent();
 		createdAt = article.getCreatedAt();

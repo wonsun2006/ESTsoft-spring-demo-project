@@ -42,8 +42,9 @@ class BlogControllerTest {
 	private BlogService blogService;
 
 	@BeforeEach
-	public void setUp(){
+	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+		repository.deleteAll();
 	}
 
 	// POST /articles API 테스트
@@ -55,7 +56,7 @@ class BlogControllerTest {
 		String json = objectMapper.writeValueAsString(article);
 
 		// when: POST /articles API 호출
-		ResultActions resultActions = mockMvc.perform(post("/articles")
+		ResultActions resultActions = mockMvc.perform(post("/api/articles")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(json));
 
@@ -74,7 +75,7 @@ class BlogControllerTest {
 		Article article = repository.save(new Article("title", "content"));
 
 		// when: 조회 API
-		ResultActions resultActions = mockMvc.perform(get("/articles")
+		ResultActions resultActions = mockMvc.perform(get("/api/articles")
 			.accept(MediaType.APPLICATION_JSON));
 
 		// then: API 호출 결과 검증
@@ -90,7 +91,7 @@ class BlogControllerTest {
 		Long id = article.getId();
 
 		// when: API 호출
-		ResultActions resultActions = mockMvc.perform(get("/articles/{id}", id)
+		ResultActions resultActions = mockMvc.perform(get("/api/articles/{id}", id)
 			.accept(MediaType.APPLICATION_JSON));
 
 		// then: API 호출 결과 검증
@@ -103,7 +104,7 @@ class BlogControllerTest {
 	@Test
 	public void findOneException() throws Exception {
 		// when
-		ResultActions resultActions = mockMvc.perform(get("/articles/{id}", 1000L)
+		ResultActions resultActions = mockMvc.perform(get("/api/articles/{id}", 1000L)
 			.accept(MediaType.APPLICATION_JSON));
 
 		// given
@@ -117,7 +118,7 @@ class BlogControllerTest {
 		Long id = article.getId();
 
 		// when: API 호출
-		ResultActions resultActions = mockMvc.perform(delete("/articles/{id}", id)
+		ResultActions resultActions = mockMvc.perform(delete("/api/articles/{id}", id)
 			.accept(MediaType.APPLICATION_JSON));
 
 		// then: API 호출 결과 검증
@@ -133,7 +134,7 @@ class BlogControllerTest {
 		UpdateArticleRequestDTO request = new UpdateArticleRequestDTO("updated title", "updated content");
 		String updateJsonContent = objectMapper.writeValueAsString(request);
 
-		ResultActions resultActions = mockMvc.perform(put("/articles/{id}",id)
+		ResultActions resultActions = mockMvc.perform(put("/api/articles/{id}", id)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(updateJsonContent));
 
@@ -143,12 +144,12 @@ class BlogControllerTest {
 	}
 
 	@Test
-	public void updateArticleFail() throws Exception{
+	public void updateArticleFail() throws Exception {
 		Long notExistsId = 1000L;
 		UpdateArticleRequestDTO request = new UpdateArticleRequestDTO("title", "content");
 		String updateJsonContent = objectMapper.writeValueAsString(request);
 
-		ResultActions resultActions = mockMvc.perform(put("/articles/{id}", notExistsId)
+		ResultActions resultActions = mockMvc.perform(put("/api/articles/{id}", notExistsId)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(updateJsonContent));
 

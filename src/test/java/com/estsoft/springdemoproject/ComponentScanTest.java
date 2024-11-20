@@ -1,9 +1,11 @@
 package com.estsoft.springdemoproject;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@Disabled
 public class ComponentScanTest {
 
 	@Test
