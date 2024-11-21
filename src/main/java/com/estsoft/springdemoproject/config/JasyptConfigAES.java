@@ -20,7 +20,7 @@ public class JasyptConfigAES {
 		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
 		encryptor.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
 		// encryptor.setPassword(password);
-		encryptor.setPassword("secret");
+		encryptor.setPassword("jasypt_key");
 		encryptor.setIvGenerator(new RandomIvGenerator());
 		encryptor.setSaltGenerator(new RandomSaltGenerator());
 		return encryptor;
